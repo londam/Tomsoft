@@ -42,7 +42,7 @@ const ProductsSearch = () => {
       }
 
       const data = await response.json();
-      setFoundProducts(data);
+      setFoundProducts(data.result[0].artikli);
     } catch (error) {
       console.error("Failed to fetch products:", error);
     }
