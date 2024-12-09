@@ -1,18 +1,14 @@
-import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
 import SearchIcon from "@mui/icons-material/Search";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import HistoryIcon from "@mui/icons-material/History";
 import { useState } from "react";
 import { Collapse, ListSubheader } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
@@ -32,7 +28,7 @@ const Sidebar = () => {
         </ListSubheader>
       }
     >
-      <ListItemButton>
+      <ListItemButton component={Link} to="/search">
         <ListItemIcon>
           <SearchIcon />
         </ListItemIcon>
@@ -44,13 +40,13 @@ const Sidebar = () => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton sx={{ pl: 4 }} component={Link} to="/payments">
             <ListItemIcon>
               <MonetizationOnIcon />
             </ListItemIcon>
             <ListItemText primary="Obračun prometa po vrstama plaćanja" />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton sx={{ pl: 4 }} component={Link} to="/productsSold">
             <ListItemIcon>
               <HistoryIcon />
             </ListItemIcon>
