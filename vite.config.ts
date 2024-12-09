@@ -1,7 +1,17 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-})
+  server: {
+    proxy: {
+      "/datasnap": {
+        target: "http://apidemo.luceed.hr", // Target API URL
+        changeOrigin: true, // Make sure the target's CORS headers are respected
+        secure: false, // If using HTTP instead of HTTPS
+        // rewrite: (path) => path.replace(/^\/datasnap/, ""), // Optional: to rewrite the path if necessary
+      },
+    },
+  },
+});
