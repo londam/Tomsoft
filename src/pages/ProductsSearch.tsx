@@ -4,19 +4,6 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
-// const sampleProducts = [
-//   { id: 1, name: "Product 1" },
-//   { id: 2, name: "Product 2" },
-//   { id: 3, name: "Product 3" },
-//   { id: 4, name: "Product 4" },
-//   { id: 5, name: "Product 5" },
-//   { id: 6, name: "Product 6" },
-//   { id: 7, name: "Product 7" },
-//   { id: 8, name: "Product 8" },
-//   { id: 9, name: "Product 9" },
-//   { id: 10, name: "Product 10" },
-// ];
-
 const ProductsSearch = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [foundProducts, setFoundProducts] = useState([]);
@@ -25,8 +12,6 @@ const ProductsSearch = () => {
     const apiUrl = import.meta.env.VITE_LUCEED_API_URL_ARTIKLI;
     const username = import.meta.env.VITE_LUCEED_USERNAME;
     const password = import.meta.env.VITE_LUCEED_PASSWORD;
-
-    console.log({ apiUrl, username, password });
 
     try {
       const response = await fetch(`${apiUrl}/${searchQuery}`, {

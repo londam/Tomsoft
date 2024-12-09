@@ -1,7 +1,7 @@
 U nastavku je zadatak gdje je potrebno napraviti demo aplikaciju koja se spaja na Luceed API (rest web servisi) i radi sljedeće:
 
 1. Upit za dio naziva i dohvat i prikaz liste artikala za taj dio naziva. Od podataka dovoljno je prikazati id artikla i naziv artikla.
-   endpoint: http://apidemo.luceed.hr/datasnap/rest/artikli/naziv/<dio-naziva>/<[od_zapisa,broj_zapisa]>
+   endpoint: http://apidemo.luceed.hr/datasnap/rest/artikli/naziv/<dio-naziva>
 2. Upit za period obračuna i dohvat obračuna prema točki 3.3. dokumentacije (str 210)
    endpoint: http://apidemo.luceed.hr/datasnap/rest/mpobracun/placanja/<pj_uid>/<od_datuma>/<do_datuma>
 3. Upit za period obračuna i dohvat obračuna prema točki 3.4. dokumentacije (str 211)

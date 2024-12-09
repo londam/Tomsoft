@@ -10,7 +10,6 @@ export default defineConfig({
         target: "http://apidemo.luceed.hr", // Target API URL
         changeOrigin: true, // Make sure the target's CORS headers are respected
         secure: false, // If using HTTP instead of HTTPS
-        // rewrite: (path) => path.replace(/^\/datasnap/, ""), // Optional: to rewrite the path if necessary
       },
     },
   },
