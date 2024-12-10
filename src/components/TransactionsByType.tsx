@@ -8,6 +8,7 @@ import "dayjs/locale/hr";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import fetchDataFromServer from "../utils/fetchData";
+import checkTip from "../utils/checkTip";
 
 dayjs.locale("hr");
 
@@ -23,16 +24,7 @@ const TransactionsByType = ({ tip, columns }: Props) => {
   const [foundProducts, setFoundProducts] = useState([]);
   const [cleared, setCleared] = useState<boolean>(false);
 
-  let obracunTipa,
-    rowId = "";
-
-  if (tip === "placanja") {
-    obracunTipa = "obracun_placanja";
-    rowId = "vrste_placanja_uid";
-  } else if (tip === "artikli") {
-    obracunTipa = "obracun_artikli";
-    rowId = "artikl_uid";
-  } else throw new Error("Wrong type of 'tip obracuna'");
+  let [obracunTipa, rowId, tableName] = checkTip(tip);
 
   useEffect(() => {
     if (cleared) {
@@ -51,7 +43,6 @@ const TransactionsByType = ({ tip, columns }: Props) => {
     const endpointFinal = `${endpoint}/${tip}/${pjUID}/${startDate?.format("DD.MM.YYYY")}${
       endDate ? `/${endDate.format("DD.MM.YYYY")}` : ""
     }`;
-    // console.log({ endpointFinal });
 
     setFoundProducts((await fetchDataFromServer(endpointFinal))[obracunTipa]);
   };
@@ -133,7 +124,7 @@ const TransactionsByType = ({ tip, columns }: Props) => {
       </Box>
       <Box sx={{ width: "100%" }}>
         <Typography variant="h6" gutterBottom>
-          Plaćanja
+          {tableName}
         </Typography>
         <DataGrid
           rows={foundProducts}

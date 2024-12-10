@@ -3,34 +3,17 @@ import { TextField, Button, Box, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import fetchDataFromServer from "../utils/fetchData";
 
 const ProductsSearch = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [foundProducts, setFoundProducts] = useState([]);
 
   const handleSearch = async () => {
-    const apiUrl = import.meta.env.VITE_LUCEED_API_URL_ARTIKLI;
-    const username = import.meta.env.VITE_LUCEED_USERNAME;
-    const password = import.meta.env.VITE_LUCEED_PASSWORD;
+    const apiUrl = import.meta.env.VITE_LUCEED_API_URL_ENDPOINT_ARTIKLI;
+    const endpointFinal = `${apiUrl}/${searchQuery}`;
 
-    try {
-      const response = await fetch(`${apiUrl}/${searchQuery}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      setFoundProducts(data.result[0].artikli);
-    } catch (error) {
-      console.error("Failed to fetch products:", error);
-    }
+    setFoundProducts((await fetchDataFromServer(endpointFinal)).artikli);
   };
 
   const columns: GridColDef[] = [
@@ -56,7 +39,7 @@ const ProductsSearch = () => {
         }}
       >
         <TextField
-          label="Product name"
+          label="Ime artikla"
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -68,11 +51,11 @@ const ProductsSearch = () => {
           onClick={handleSearch}
           startIcon={<SearchIcon />}
         >
-          Search
+          Traži
         </Button>
       </Box>
       <Typography variant="h6" gutterBottom>
-        Products
+        Artikli
       </Typography>
       <DataGrid
         rows={foundProducts}

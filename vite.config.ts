@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/datasnap": {
-        target: "http://apidemo.luceed.hr", // Target API URL
+      "/rest": {
+        target: "http://apidemo.luceed.hr/datasnap", // Target API URL
         changeOrigin: true, // Make sure the target's CORS headers are respected
         secure: false, // If using HTTP instead of HTTPS
       },
