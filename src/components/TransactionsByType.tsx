@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useEffect, useState } from "react";
 import { TextField, Button, Box, Typography, Alert } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -15,14 +13,26 @@ dayjs.locale("hr");
 
 interface Props {
   tip: string;
+  columns: GridColDef[];
 }
 
-const TransactionsByType = ({ tip }: Props) => {
+const TransactionsByType = ({ tip, columns }: Props) => {
   const [pjUID, setPjUID] = useState("4986-1");
   const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
-  const [endDate, setEndDate] = useState<Dayjs | null>(dayjs());
+  const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [foundProducts, setFoundProducts] = useState([]);
   const [cleared, setCleared] = useState<boolean>(false);
+
+  let obracunTipa,
+    rowId = "";
+
+  if (tip === "placanja") {
+    obracunTipa = "obracun_placanja";
+    rowId = "vrste_placanja_uid";
+  } else if (tip === "artikli") {
+    obracunTipa = "obracun_artikli";
+    rowId = "artikl_uid";
+  } else throw new Error("Wrong type of 'tip obracuna'");
 
   useEffect(() => {
     if (cleared) {
@@ -41,33 +51,10 @@ const TransactionsByType = ({ tip }: Props) => {
     const endpointFinal = `${endpoint}/${tip}/${pjUID}/${startDate?.format("DD.MM.YYYY")}${
       endDate ? `/${endDate.format("DD.MM.YYYY")}` : ""
     }`;
-    let obracunTipa = [];
-    if (tip === "placanja")
-      obracunTipa = (await fetchDataFromServer(endpointFinal)).obracun_placanja;
-    else if (tip === "artikli")
-      obracunTipa = (await fetchDataFromServer(endpointFinal)).obracun_artikli;
-    else throw new Error("Wrong type of 'tip obracuna'");
+    // console.log({ endpointFinal });
 
-    setFoundProducts(obracunTipa);
+    setFoundProducts((await fetchDataFromServer(endpointFinal))[obracunTipa]);
   };
-
-  const columns: GridColDef[] = [
-    { field: "vrste_placanja_uid", headerName: "ID", width: 100, minWidth: 50 },
-    { field: "naziv", headerName: "Naziv", width: 150, minWidth: 100 },
-    { field: "iznos", headerName: "Iznos", width: 150, minWidth: 50 },
-    {
-      field: "nadgrupa_placanja_uid",
-      headerName: "Nadgrupa plaćanja UID",
-      width: 200,
-      minWidth: 150,
-    },
-    {
-      field: "nadgrupa_placanja_naziv",
-      headerName: "Nadgrupa plaćanja naziv",
-      flex: 1,
-      minWidth: 150,
-    },
-  ];
 
   const paginationModel = { page: 0, pageSize: 5 };
 
@@ -151,7 +138,7 @@ const TransactionsByType = ({ tip }: Props) => {
         <DataGrid
           rows={foundProducts}
           columns={columns}
-          getRowId={(row) => row.vrste_placanja_uid}
+          getRowId={(row) => row[rowId]}
           initialState={{ pagination: { paginationModel } }}
           pageSizeOptions={[5, 10, 20]}
           sx={{ border: 0 }}
