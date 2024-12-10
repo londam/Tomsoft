@@ -1,3 +1,5 @@
+# Zadatak
+
 U nastavku je zadatak gdje je potrebno napraviti demo aplikaciju koja se spaja na Luceed API (rest web servisi) i radi sljedeće:
 
 1. Upit za dio naziva i dohvat i prikaz liste artikala za taj dio naziva. Od podataka dovoljno je prikazati id artikla i naziv artikla.
@@ -18,7 +20,8 @@ Rok za dostavu aplikacije je 7 dana.
 
 Pristupni podaci su hard kodirani u .env file. Obično bi se takve stvari trebale spremiti u backendu (radi sigurnosti), ali za potrebe ovog zadatka u kojem imam pristup samo frontendu, stavio sam ih u .env. Na taj način barem nisu javno dostupni na GitHubu, nego samo onome tko ima pristup originalnom mojem kodu.
 
-#TODO:
+## TODO:
+
 Umjesto console.log-ova prilikom bacanja errora, trebalo bi napraviti nešto što bi upozorilo korisnika da je došlo do pogreške i uputiti ga što treba napraviti (npr. refresh aplikacije)
 
 Imena varijabli trenutno su mix HR/EN. Da ima više vremena (a i pretpostavljam u cijelom vašem codebase imate neki protokol gdje koje koristite) to bi trebalo standardizirati.
@@ -27,13 +30,20 @@ Sam izgled je trenutno osnovni, svakako bi ga trebalo stilizirati u istom stilu 
 
 Poboljšati responzivnost.
 
-#Kako pokrenuti:
-formirati .env.local file i staviti sljedeće varijable unutra:
-VITE_LUCEED_API_URL =
+## Kako pokrenuti:
+
+1. Formirati .env.local file i staviti sljedeće varijable unutra:
+   VITE_LUCEED_API_URL =
+
 VITE_LUCEED_API_URL_ENDPOINT_OBR =
+
 VITE_LUCEED_API_URL_ENDPOINT_ARTIKLI =
+
 VITE_LUCEED_USERNAME =
+
 VITE_LUCEED_PASSWORD =
 
-npm i
+2. Pokrenuti u terminalu naredbe
+   npm i
+
 npm run dev
