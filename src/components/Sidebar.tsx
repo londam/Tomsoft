@@ -24,7 +24,7 @@ const Sidebar = () => {
       aria-labelledby="nested-list-subheader"
       subheader={
         <ListSubheader component="div" id="nested-list-subheader">
-          Luceed Izbornik
+          <h1>Luceed Izbornik</h1>
         </ListSubheader>
       }
     >

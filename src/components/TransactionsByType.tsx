@@ -17,30 +17,29 @@ interface Props {
   columns: GridColDef[];
 }
 
+//this is pjUID from manual
+const startingPJUID = "4986-1";
+
 const TransactionsByType = ({ tip, columns }: Props) => {
-  const [pjUID, setPjUID] = useState("4986-1");
+  const [pjUID, setPjUID] = useState(startingPJUID);
   const [startDate, setStartDate] = useState<Dayjs | null>(dayjs());
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
   const [foundProducts, setFoundProducts] = useState([]);
   const [cleared, setCleared] = useState<boolean>(false);
 
-  let [obracunTipa, rowId, tableName] = checkTip(tip);
+  const [obracunTipa, rowId, tableName] = checkTip(tip);
 
-  useEffect(() => {
-    if (cleared) {
-      const timeout = setTimeout(() => {
-        setCleared(false);
-      }, 1500);
-
-      return () => clearTimeout(timeout);
-    }
-    return () => {};
-  }, [cleared]);
+  const onClearEndDate = () => {
+    setCleared(true);
+    setTimeout(() => {
+      setCleared(false);
+    }, 1500);
+  };
 
   const handleSearch = async () => {
     const endpoint = import.meta.env.VITE_LUCEED_API_URL_ENDPOINT_OBR;
 
-    const endpointFinal = `${endpoint}/${tip}/${pjUID}/${startDate?.format("DD.MM.YYYY")}${
+    const endpointFinal = `${endpoint}/${tip}/${pjUID}/${startDate!.format("DD.MM.YYYY")}${
       endDate ? `/${endDate.format("DD.MM.YYYY")}` : ""
     }`;
 
@@ -99,11 +98,11 @@ const TransactionsByType = ({ tip, columns }: Props) => {
               onChange={(newValue) => setEndDate(newValue)}
               sx={{ width: "50%" }}
               slotProps={{
-                field: { clearable: true, onClear: () => setCleared(true) },
+                field: { clearable: true, onClear: onClearEndDate },
               }}
             />
             {cleared && (
-              <Alert sx={{ position: "absolute", bottom: 0, right: 0 }} severity="success">
+              <Alert sx={{ position: "absolute", top: 30, right: 30 }} severity="success">
                 Field cleared! {endDate?.format("DD.MM.YYYY.")}
               </Alert>
             )}

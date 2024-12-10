@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import ProductsSearch from "./pages/ProductsSearch";
-import TransactionsByPayment from "./pages/transactionsByPayment";
-import TransactionsByProducts from "./pages/transactionsByProducts";
+import TransactionsByPayment from "./pages/TransactionsByPayment";
+import TransactionsByProducts from "./pages/TransactionsByProducts";
 
 function App() {
   return (
