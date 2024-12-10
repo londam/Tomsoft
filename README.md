@@ -33,7 +33,8 @@ Poboljšati responzivnost.
 ## Kako pokrenuti:
 
 1. Formirati .env.local file i staviti sljedeće varijable unutra:
-   VITE_LUCEED_API_URL =/rest/
+
+VITE_LUCEED_API_URL =/rest/
 
 VITE_LUCEED_API_URL_ENDPOINT_OBR =/mpobracun
 
@@ -44,9 +45,13 @@ VITE_LUCEED_USERNAME =
 VITE_LUCEED_PASSWORD =
 
 2. Pokrenuti u terminalu naredbe:
+
    npm i
+   
    npm run dev
 
 3. za pokretanje testova jedna od naredbi:
+   
    npm run test:ui
+   
    npm run test
