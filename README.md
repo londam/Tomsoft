@@ -44,6 +44,7 @@ VITE_LUCEED_USERNAME =
 VITE_LUCEED_PASSWORD =
 
 2. Pokrenuti u terminalu naredbe
-   npm i
+
+npm i
 
 npm run dev
