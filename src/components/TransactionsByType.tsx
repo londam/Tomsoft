@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TextField, Button, Box, Typography, Alert } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -117,7 +117,7 @@ const TransactionsByType = ({ tip, columns }: Props) => {
             onClick={handleSearch}
             startIcon={<SearchIcon />}
           >
-            Search
+            Traži
           </Button>
         </Box>
       </Box>
